@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "sekolah",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Sekolah": "MA Mada Nusantara", "longtitude": 110.6595073, "Latitude": -6.618284486 }, "geometry": { "type": "Point", "coordinates": [ 110.6595073, -6.618284486 ] } },
+{ "type": "Feature", "properties": { "Sekolah": "SMK Maarif Tegalsambi", "longtitude": 110.6552633, "Latitude": -6.619382626 }, "geometry": { "type": "Point", "coordinates": [ 110.6552633, -6.619382626 ] } },
+{ "type": "Feature", "properties": { "Sekolah": "MI Miftahul Huda Tegalsambi", "longtitude": 110.6552377, "Latitude": -6.61663924 }, "geometry": { "type": "Point", "coordinates": [ 110.6552377, -6.61663924 ] } },
+{ "type": "Feature", "properties": { "Sekolah": "SMP Maarif Tegalsambi", "longtitude": 110.653455, "Latitude": -6.616289716 }, "geometry": { "type": "Point", "coordinates": [ 110.653455, -6.616289716 ] } },
+{ "type": "Feature", "properties": { "Sekolah": "SDN 1 Tegalsambi", "longtitude": 110.6499136, "Latitude": -6.616289716 }, "geometry": { "type": "Point", "coordinates": [ 110.6499136, -6.616289716 ] } },
+{ "type": "Feature", "properties": { "Sekolah": "SDN 2 Tegalsambi", "longtitude": 110.649661, "Latitude": -6.615702215 }, "geometry": { "type": "Point", "coordinates": [ 110.649661, -6.615702215 ] } }
+]
+}

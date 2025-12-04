@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "masjid",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "masjid": "Masjid baitudz-dzakirin", "longtitude": -6.61708886, "latitude": 110.6502712 }, "geometry": { "type": "Point", "coordinates": [ 110.6502712, -6.61708886 ] } },
+{ "type": "Feature", "properties": { "masjid": "Masjid Baitul Muttaqin", "longtitude": -6.616890442, "latitude": 110.6577174 }, "geometry": { "type": "Point", "coordinates": [ 110.6577174, -6.616890442 ] } },
+{ "type": "Feature", "properties": { "masjid": "Masjid Anyar", "longtitude": -6.613170591, "latitude": 110.6535951 }, "geometry": { "type": "Point", "coordinates": [ 110.6535951, -6.613170591 ] } },
+{ "type": "Feature", "properties": { "masjid": "Musholla Hidayatul Muttaqin", "longtitude": -6.6117386355534853, "latitude": 110.65142643883006 }, "geometry": { "type": "Point", "coordinates": [ 110.651426438830057, -6.611738635553485 ] } },
+{ "type": "Feature", "properties": { "masjid": "Musholla Baitul Muqorrobin", "longtitude": -6.618834785781635, "latitude": 110.65086287015859 }, "geometry": { "type": "Point", "coordinates": [ 110.650862870158591, -6.618834785781635 ] } },
+{ "type": "Feature", "properties": { "masjid": "Musholla Albarokah", "longtitude": -6.6182308715256388, "latitude": 110.65266420735783 }, "geometry": { "type": "Point", "coordinates": [ 110.65266420735783, -6.618230871525639 ] } },
+{ "type": "Feature", "properties": { "masjid": "Musholla Trenggulon", "longtitude": -6.6193715108641422, "latitude": 110.65464182258626 }, "geometry": { "type": "Point", "coordinates": [ 110.654641822586257, -6.619371510864142 ] } },
+{ "type": "Feature", "properties": { "masjid": "Musholla Baitul Makmur", "longtitude": -6.6172471313139072, "latitude": 110.66043917165548 }, "geometry": { "type": "Point", "coordinates": [ 110.660439171655483, -6.617247131313907 ] } }
+]
+}
