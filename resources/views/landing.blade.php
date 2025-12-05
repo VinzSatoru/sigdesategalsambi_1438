@@ -5,22 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Desa Tegalsambi</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         body { font-family: 'Outfit', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
         .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .glass-nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        /* Navbar Text Colors - Default (Transparent/Dark BG) */
+        .glass-nav .nav-link, 
+        .glass-nav .logo-text,
+        .glass-nav .logo-subtext,
+        .glass-nav .mobile-btn {
+            color: #ffffff;
+            transition: color 0.3s ease;
+        }
+        .glass-nav .nav-link:hover {
+            color: #93c5fd; /* Blue-300 */
+        }
+        
+        /* Navbar Text Colors - Scrolled (White BG) */
+        .glass-nav.scrolled .nav-link,
+        .glass-nav.scrolled .mobile-btn {
+            color: #475569; /* Slate-600 */
+        }
+        .glass-nav.scrolled .logo-text {
+            color: #1e293b; /* Slate-800 */
+        }
+        .glass-nav.scrolled .logo-subtext {
+            color: #64748b; /* Slate-500 */
+        }
+        .glass-nav.scrolled .nav-link:hover,
+        .glass-nav.scrolled .nav-link.active {
+            color: #2563eb; /* Blue-600 */
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #60a5fa; /* Blue-400 for dark bg */
+            transition: width 0.3s ease;
+        }
+        .glass-nav.scrolled .nav-link::after {
+            background-color: #2563eb; /* Blue-600 for white bg */
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
         .hero-bg {
             background-color: #0f172a;
-            background-image: url("https://images.unsplash.com/photo-1518182170546-0766bc6f9213?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80");
+            /* Green Village Landscape */
+            background-image: 
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)),
+                url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80");
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax effect */
+            background-attachment: fixed;
+        }
+        .hero-pattern {
+            /* Pattern removed as requested */
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .text-shadow-lg {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .text-shadow-md {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .text-white-forced {
+            color: #ffffff !important;
+        }
+        .text-blue-200-forced {
+            color: #bfdbfe !important; /* blue-200 */
+        }
+        .btn-glow {
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 20;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
         }
         .gallery-item {
             overflow: hidden;
@@ -60,19 +160,19 @@
                         <i class="fas fa-landmark text-lg"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-slate-800 leading-none">Desa Tegalsambi</h1>
-                        <p class="text-xs text-slate-500 font-medium">Kabupaten Jepara</p>
+                        <h1 class="text-xl font-bold leading-none logo-text">Desa Tegalsambi</h1>
+                        <p class="text-xs font-medium logo-subtext">Kabupaten Jepara</p>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#beranda" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Beranda</a>
-                    <a href="#profil" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Profil</a>
-                    <a href="#statistik" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Statistik</a>
-                    <a href="#berita" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Berita</a>
-                    <a href="#galeri" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Galeri</a>
-                    <a href="#kontak" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Kontak</a>
+                    <a href="#beranda" class="nav-link transition-colors">Beranda</a>
+                    <a href="#profil" class="nav-link transition-colors">Profil</a>
+                    <a href="#statistik" class="nav-link transition-colors">Statistik</a>
+                    <a href="#berita" class="nav-link transition-colors">Berita</a>
+                    <a href="#galeri" class="nav-link transition-colors">Galeri</a>
+                    <a href="#kontak" class="nav-link transition-colors">Kontak</a>
                 </div>
 
                 <!-- CTA Button -->
@@ -87,7 +187,7 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-blue-600 focus:outline-none">
+                    <button id="mobile-menu-btn" class="mobile-btn focus:outline-none">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -113,34 +213,45 @@
 
     <!-- Hero Section (Beranda) -->
     <section id="beranda" class="hero-bg relative min-h-screen flex items-center pt-20 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
+        <div class="hero-pattern"></div>
         
         <!-- Decorative Elements -->
         <div class="absolute top-1/4 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center h-full pb-20">
             <div data-aos="fade-down" data-aos-duration="1000">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-semibold mb-6 backdrop-blur-sm">
-                    Selamat Datang di Portal Resmi
+                <span class="inline-block py-2 px-6 rounded-full bg-white/10 border border-white/30 text-white-forced font-poppins text-sm font-semibold tracking-widest mb-8 backdrop-blur-md uppercase shadow-lg">
+                    Portal Resmi Pemerintah Desa
                 </span>
             </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight" data-aos="fade-up" data-aos-delay="200">
-                Desa <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Tegalsambi</span>
+            
+            <h1 class="font-poppins text-5xl md:text-7xl lg:text-7xl font-extrabold text-white-forced tracking-tight mb-6 leading-tight drop-shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+                Desa <span class="text-blue-200 filter drop-shadow-lg">Tegalsambi</span>
             </h1>
-            <p class="text-xl md:text-2xl text-slate-300 font-light mb-10 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="400">
-                Menuju desa cerdas dengan integrasi teknologi informasi dan pemetaan geografis untuk pelayanan publik yang lebih baik.
+            
+            <div class="w-24 h-1.5 bg-blue-500 mx-auto mb-10 rounded-full shadow-lg"></div>
+
+            <p class="font-poppins text-lg md:text-xl text-white-forced font-light mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-md opacity-90" data-aos="fade-up" data-aos-delay="400">
+                Mewujudkan tata kelola pemerintahan desa yang transparan, akuntabel, dan inovatif melalui integrasi teknologi sistem informasi geografis.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center" data-aos="fade-up" data-aos-delay="600">
-                <a href="{{ route('map') }}" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl shadow-blue-600/40 flex items-center gap-3">
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center w-full" data-aos="fade-up" data-aos-delay="600">
+                <a href="{{ route('map') }}" class="btn-glow px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-600/10 hover:from-blue-500 hover:to-blue-500/20 text-white rounded-full font-poppins font-semibold text-lg transition-all flex items-center gap-3 shadow-lg shadow-blue-900/20 tracking-wide backdrop-blur-sm">
                     <i class="fas fa-map-marked-alt"></i> Jelajahi Peta
                 </a>
-                <a href="#profil" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-bold text-lg transition-all backdrop-blur-md border border-white/10 flex items-center gap-3">
+                <a href="#profil" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-full font-poppins font-semibold text-lg transition-all backdrop-blur-md border border-white/30 flex items-center gap-3 hover:border-white/60 tracking-wide">
                     <i class="fas fa-info-circle"></i> Tentang Desa
                 </a>
             </div>
         </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#profil" class="scroll-indicator text-white/50 hover:text-white transition-colors">
+            <div class="w-6 h-10 border-2 border-current rounded-full flex justify-center p-1">
+                <div class="w-1 h-3 bg-current rounded-full animate-bounce"></div>
+            </div>
+        </a>
     </section>
 
     <!-- Profil Section -->
@@ -407,11 +518,9 @@
         window.addEventListener('scroll', () => {
             // Navbar Style
             if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-                nav.classList.replace('bg-white/80', 'bg-white/95');
+                nav.classList.add('scrolled');
             } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.replace('bg-white/95', 'bg-white/80');
+                nav.classList.remove('scrolled');
             }
 
             // Scroll Spy
@@ -419,17 +528,16 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) {
+                if (pageYOffset >= (sectionTop - 300)) { // Adjusted offset
                     current = section.getAttribute('id');
                 }
             });
 
             navLinks.forEach(link => {
-                link.classList.remove('text-blue-600');
-                link.classList.add('text-slate-600');
+                link.classList.remove('active');
+                
                 if (link.getAttribute('href').includes(current)) {
-                    link.classList.remove('text-slate-600');
-                    link.classList.add('text-blue-600');
+                    link.classList.add('active');
                 }
             });
         });

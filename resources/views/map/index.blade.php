@@ -3,18 +3,6 @@
 @section('content')
     <div class="sidebar">
         <div class="sidebar-content">
-            <!-- Search Bar -->
-            <div class="mb-6">
-                <div class="relative">
-                    <input type="text" id="search-input" placeholder="Cari lokasi (sekolah, masjid...)" 
-                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all shadow-sm font-medium text-gray-700 placeholder-gray-400">
-                    <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
-                </div>
-                <div id="search-results" class="mt-2 bg-white rounded-xl shadow-lg border border-gray-100 hidden max-h-60 overflow-y-auto">
-                    <!-- Results will appear here -->
-                </div>
-            </div>
-
             <div class="mb-6">
                 <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Tipe Peta</h3>
                 <div class="grid grid-cols-2 gap-3">
@@ -91,6 +79,10 @@
                         <div class="flex items-center">
                             <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-3 shadow-sm text-white"><i class="fas fa-map-marker-alt text-xs"></i></div>
                             <span class="font-medium text-gray-700">Fasilitas Umum</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center mr-3 shadow-sm text-white"><i class="fas fa-camera text-xs"></i></div>
+                            <span class="font-medium text-gray-700">Tempat Wisata</span>
                         </div>
                         <div class="flex items-center">
                             <div class="w-8 h-1 bg-red-500 mr-3 rounded"></div>
@@ -330,6 +322,9 @@
                 } else if (category === 'Pemerintahan' || name.includes('balai') || name.includes('kantor')) {
                     iconClass = 'fa-landmark';
                     color = '#dc2626';
+                } else if (category === 'Tempat Wisata' || name.includes('wisata') || name.includes('pantai') || name.includes('taman')) {
+                    iconClass = 'fa-camera';
+                    color = '#9333ea'; // Purple-600
                 }
 
                 const icon = L.divIcon({

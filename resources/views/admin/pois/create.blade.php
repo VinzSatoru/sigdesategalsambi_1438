@@ -20,6 +20,7 @@
                             <option value="Pendidikan">Pendidikan</option>
                             <option value="Kesehatan">Kesehatan</option>
                             <option value="Tempat Ibadah">Tempat Ibadah</option>
+                            <option value="Tempat Wisata">Tempat Wisata</option>
                             <option value="Fasilitas Umum">Fasilitas Umum</option>
                             <option value="Lainnya">Lainnya</option>
                         </select>

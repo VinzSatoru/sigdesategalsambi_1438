@@ -20,6 +20,7 @@
                             <option value="Pendidikan" {{ $poi->category == 'Pendidikan' ? 'selected' : '' }}>Pendidikan</option>
                             <option value="Kesehatan" {{ $poi->category == 'Kesehatan' ? 'selected' : '' }}>Kesehatan</option>
                             <option value="Tempat Ibadah" {{ $poi->category == 'Tempat Ibadah' ? 'selected' : '' }}>Tempat Ibadah</option>
+                            <option value="Tempat Wisata" {{ $poi->category == 'Tempat Wisata' ? 'selected' : '' }}>Tempat Wisata</option>
                             <option value="Fasilitas Umum" {{ $poi->category == 'Fasilitas Umum' ? 'selected' : '' }}>Fasilitas Umum</option>
                             <option value="Lainnya" {{ $poi->category == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                         </select>
