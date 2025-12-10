@@ -53,6 +53,15 @@ class PoiController extends Controller
     {
         // Select X and Y from geometry to pre-fill form
         $poi = \App\Models\Poi::select('*', \DB::raw('ST_X(geom) as lng, ST_Y(geom) as lat'))->findOrFail($id);
+
+        // Auto-fix swapped coordinates (Legacy Data Issue)
+        // If Lat > 90, it's definitely Longitude (swapped)
+        if (abs($poi->lat) > 90) {
+            $temp = $poi->lat;
+            $poi->lat = $poi->lng;
+            $poi->lng = $temp;
+        }
+
         return view('admin.pois.edit', compact('poi'));
     }
 

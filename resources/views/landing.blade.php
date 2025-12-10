@@ -408,6 +408,86 @@
         </div>
     </section>
 
+    <!-- Berita Section -->
+    <section id="berita" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex items-center justify-center mb-12">
+                <div class="h-1 flex-1 bg-slate-200"></div>
+                <h2 class="text-3xl font-bold text-slate-800 px-8 uppercase tracking-wider">Berita Terkini</h2>
+                <div class="h-1 flex-1 bg-slate-200"></div>
+            </div>
+
+            <div class="space-y-10">
+                @foreach($news_updates as $news)
+                <div class="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <!-- Title Bar -->
+                    <div class="bg-slate-700 px-6 py-3">
+                        <h3 class="text-xl font-bold text-white">
+                            <a href="{{ route('news.show', $news->slug) }}" class="hover:text-blue-200 transition-colors">{{ $news->title }}</a>
+                        </h3>
+                    </div>
+                    
+                    <!-- Content Area -->
+                    <div class="p-6">
+                        <!-- Meta Info -->
+                        <div class="flex items-center text-xs text-slate-500 mb-4 space-x-4 border-b border-slate-100 pb-2">
+                            <span class="flex items-center"><i class="far fa-clock mr-1"></i> {{ $news->published_at->format('d F Y') }}</span>
+                            <span class="flex items-center"><i class="far fa-user mr-1"></i> Administrator</span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-6 items-start">
+                            <!-- Image -->
+                            <div class="w-full sm:w-1/3 lg:w-1/4 flex-shrink-0">
+                                <div class="aspect-[4/3] rounded-lg overflow-hidden border border-slate-100 shadow-sm">
+                                    <img src="{{ Str::startsWith($news->image, 'http') ? $news->image : asset('storage/' . $news->image) }}" 
+                                         alt="{{ $news->title }}" 
+                                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                            </div>
+                            
+                            <!-- Text -->
+                            <div class="flex-1 min-w-0"> <!-- min-w-0 required for text truncation in flex items -->
+                                <p class="text-slate-600 leading-relaxed text-justify line-clamp-4 sm:line-clamp-none mb-4">
+                                    {{ Str::limit($news->content, 350) }}
+                                </p>
+                                <div class="mt-auto">
+                                    <a href="{{ route('news.show', $news->slug) }}" class="inline-flex items-center px-4 py-2 bg-slate-100 hover:bg-blue-600 text-slate-700 hover:text-white rounded-lg transition-all duration-300 text-sm font-medium group-hover:shadow-md">
+                                        Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="galeri" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Galeri Desa</h2>
+                <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+                <p class="mt-4 text-lg text-slate-600">Potret keindahan alam dan kegiatan masyarakat Desa Tegalsambi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                @foreach($galleries as $gallery)
+                <div class="gallery-item group relative h-64 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="{{ Str::startsWith($gallery->image, 'http') ? $gallery->image : asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h4 class="text-white font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{{ $gallery->title }}</h4>
+                        <p class="text-slate-200 text-sm mt-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{{ $gallery->description }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <!-- Kontak Section -->
     <section id="kontak" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

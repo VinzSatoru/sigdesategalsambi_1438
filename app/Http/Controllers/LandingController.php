@@ -27,9 +27,14 @@ class LandingController extends Controller
         $total_infrastructures = \App\Models\Infrastructure::count();
         $total_land_uses = \App\Models\LandUse::count();
 
+        // News & Gallery
+        $news_updates = \App\Models\News::latest('published_at')->take(3)->get();
+        $galleries = \App\Models\Gallery::latest()->take(6)->get();
+
         return view('landing', compact(
             'total_population', 'male_population', 'female_population', 'total_kk', 'area_ha',
-            'total_pois', 'total_infrastructures', 'total_land_uses'
+            'total_pois', 'total_infrastructures', 'total_land_uses',
+            'news_updates', 'galleries'
         ));
     }
 }

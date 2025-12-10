@@ -60,6 +60,18 @@
                         <i class="fas fa-layer-group w-6"></i>
                         <span class="font-medium">Penggunaan Lahan</span>
                     </a>
+
+                    <p class="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-6 mb-2">Manajemen Konten</p>
+
+                    <a href="{{ route('admin.news.index') }}" class="flex items-center px-4 py-3 rounded-lg transition-colors duration-200 {{ request()->routeIs('admin.news.*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <i class="fas fa-newspaper w-6"></i>
+                        <span class="font-medium">Berita</span>
+                    </a>
+
+                    <a href="{{ route('admin.galleries.index') }}" class="flex items-center px-4 py-3 rounded-lg transition-colors duration-200 {{ request()->routeIs('admin.galleries.*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <i class="fas fa-images w-6"></i>
+                        <span class="font-medium">Galeri</span>
+                    </a>
                 </div>
             </nav>
 
