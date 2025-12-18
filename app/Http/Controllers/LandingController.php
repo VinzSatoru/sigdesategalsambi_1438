@@ -37,4 +37,24 @@ class LandingController extends Controller
             'news_updates', 'galleries'
         ));
     }
+
+    public function sendMessage(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'message' => 'required',
+        ]);
+
+        $contactData = $request->all();
+
+        // Format Date for WhatsApp
+        $wa_phone = '6285741458614'; // Ganti dengan nomor WhatsApp Admin (gunakan kode negara 62)
+        $wa_text = "Halo Admin Desa Tegalsambi, saya ingin mengirim pesan:\n\n" .
+                   "Nama: " . $contactData['name'] . "\n" .
+                   "Pesan:\n" . $contactData['message'];
+
+        $url = "https://wa.me/" . $wa_phone . "?text=" . urlencode($wa_text);
+
+        return redirect()->away($url);
+    }
 }

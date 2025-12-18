@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\LandingController::class, 'index'])->name('landing');
 Route::get('/peta', [App\Http\Controllers\MapController::class, 'index'])->name('map');
 Route::get('/berita/{slug}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
+Route::post('/contact', [App\Http\Controllers\LandingController::class, 'sendMessage'])->name('contact.send');
 
 // Auth Routes
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
